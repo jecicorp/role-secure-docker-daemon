@@ -16,10 +16,11 @@
     state: touch 
     path: "{{ dds_extfile }}" 
 
-- name: Add alt name to extfile
+- name: Add alt subjectAltName to extfile
   lineinfile:
-    dest: "{{ dds_extfile }}" 
-    line: "subjectAltName = IP:{{ dds_host }},IP:127.0.0.1"
+    dest: "{{ dds_extfile }}"
+    regexp: '^subjectAltName'
+    line: "subjectAltName = DNS:{{ dds_common_name }},IP:127.0.0.1,IP:{{ dds_host }}"
 
 - name: Add alt extendedKeyUsage to extfile
   lineinfile:
